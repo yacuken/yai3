@@ -1,0 +1,111 @@
+@import url('file:///home/archie/.config/userstyles/colors.css');
+@-moz-document domain("linux.org.ru") {
+  html, body {
+    background: var(--bg);
+    color: var(--fg);
+  }
+  /*header*/
+  #sitetitle { font-family: Terminus; }
+  #loginGreating a:after { content: "@178.248.233.6"; }
+  #loginGreating a, #sitetitle, .menu ul li a {
+    color: var(--fg) !important;
+    text-decoration: none;
+  }
+  /*body*/
+  .mini-news, .boxlet, .infoblock, .page-number {
+    border-radius: 0;
+    background: var(--color8);
+  }
+  .page-number {
+    border: none;
+  }
+  h1, h2, h3 {
+    font-family: Terminus;
+    color: var(--fg);
+  }
+  h2 a {
+    color: var(--fg);
+    text-decoration: none;
+  }
+  .stars, a.tag, p.tags {
+    color: var(--color4) !important;
+    text-decoration: none;
+  }
+  i.icon-tag {
+    color: var(--color1);
+  }
+  .sign a {
+    color: var(--color1) !important;
+    text-decoration: none;
+  }
+  a, .msg-top-header a {
+    color: var(--fg) !important;
+  }
+  #bd ul li a:visited {
+    color: var(--color7) !important;
+  }
+  a.btn:hover, button.btn:hover {
+    box-shadow: none !important;
+  }
+  a.btn-default, button.btn-default {
+    color: var(--fg) !important;
+    background: var(--color8) !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+  a.btn-selected {
+    color: var(--bg) !important;
+    background: var(--color7) !important;
+    border-radius: 0 !important;
+  }
+  a.btn-primary, button.btn-primary {
+    color: var(--fg) !important;
+    background: var(--color1) !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+  button.btn-danger {
+    color: var(--fg) !important;
+    background: var(--color5) !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+  .forum table {
+    border-color: var(--color7) !important;
+  }
+  .forum table thead, .forum table tfoot {
+    background: var(--color8) !important;
+    color: var(--fg) !important;
+  }
+  .forum table tbody tr:hover {
+    background: var(--color8) !important;
+  }
+  .message-table .tag {
+    color: var(--color4);
+    background: transparent !important;
+  }
+  .msg {
+    background: var(--bg) !important;
+  }
+  .fav-buttons [class^="icon-"] {
+    color: var(--fg);
+  }
+  .fav-buttons .selected [class^="icon-"] {
+    color: var(--color1);
+  }
+  #commentForm input[type="text"], #commentForm textarea, input[type="search"], select#range, select#interval, input#user {
+    font-family: Terminus;
+    background: var(--color8);
+    color: var(--fg);
+    border: none;
+  }
+  #whois_userpic {
+    border-radius: 0;
+    background: var(--bg);
+  }
+  .photo {
+    border-radius: 50%;
+  }
+}
+
+
