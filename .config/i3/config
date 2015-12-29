@@ -1,0 +1,104 @@
+# colors #######################################################################
+set $color0 #263238
+set $color1 #ff9800
+set $color2 #8bc34a
+set $color3 #ffc107
+set $color4 #03a9f4
+set $color5 #e91e63
+set $color6 #009688
+set $color7 #cfd8dc
+set $color8 #37474f
+set $color9 #ffa74d
+set $color10 #9ccc65
+set $color11 #ffa000
+set $color12 #81d4fa
+set $color13 #ad1457
+set $color14 #26a69a
+set $color15 #eceff1
+set $bg #263238
+set $fg #eceff1
+
+# general ######################################################################
+set $mod Mod4
+set $term termite
+
+font pango:Terminus, FontAwesome 8
+gaps inner 10
+gaps outer 10
+for_window [class="^.*"] border none
+
+# shortcuts ####################################################################
+bindsym $mod+Return exec $term
+bindsym $mod+d exec --no-startup-id $HOME/.config/dmenu/dmenu_run
+bindsym $mod+Escape exec --no-startup-id $HOME/.config/dmenu/dmenu_pm
+bindsym $mod+t exec --no-startup-id $HOME/.config/dmenu/dmenu_themes
+bindsym --release Print exec --no-startup-id scrot $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
+bindsym --release Shift+Print exec --no-startup-id scrot -s $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
+
+# keys #########################################################################
+floating_modifier $mod
+bindsym $mod+Shift+q kill
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+# workspaces ###################################################################
+set $ws1  "1:"
+set $ws2  "2:"
+set $ws3  "3:"
+set $ws4  "4:"
+set $ws5  "5:"
+set $ws6  "6:"
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+grave workspace back_and_forth
+
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+
+# scratchpad ###################################################################
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# bar ##########################################################################
+bar {
+  position top
+  strip_workspace_numbers yes
+  status_command i3blocks
+  tray_output none
+  font pango:Terminus, FontAwesome 8
+  colors {
+    statusline $fg
+    background $bg
+    separator  $fg
+    focused_workspace  $bg $bg $color4
+    inactive_workspace $bg $bg $color7
+    active_workspace   $bg $bg $color7
+    urgent_workspace   $bg $bg $color1
+  }
+}
+
+# autostarts ###################################################################
+exec --no-startup-id compton -b
+
+exec_always --no-startup-id hsetroot -solid "$bg"

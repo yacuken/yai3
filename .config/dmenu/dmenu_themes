@@ -1,0 +1,25 @@
+#!/bin/bash
+
+ABSOLUTE_PATH=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
+source $ABSOLUTE_PATH/dmenu.env
+
+function set_theme {
+  cd $HOME/yai3
+  python ./parse schemes/$1.json
+  # reload ff styles
+  xdotool search --name "Mozilla Firefox" key --clearmodifiers --repeat 2 'F8'
+  # reload termite config
+  killall -USR1 termite
+  # restart i3
+  i3-msg restart
+  # just kill dunst
+  killall dunst
+}
+
+DMENU="dmenu -dim 0.5 -dc $BG -fn Terminus-8 -w 1346 -h 10 -x 10 -y 379 -nb $BG -nf $FG -sb $BG -sf $COLOR4"
+
+choise=$(ls -1 $HOME/yai3/schemes | sed 's/.json//g' | $DMENU | cut -f 1)
+
+if [ -n "$choise" ]; then
+  set_theme $choise
+fi

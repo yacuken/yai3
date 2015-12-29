@@ -1,0 +1,135 @@
+#!/usr/bin/env python
+import os
+import sys
+import json
+import shutil
+from xdg.BaseDirectory import *
+
+blue = '\033[94m'
+rst = '\033[0m'
+
+def gtk3(scheme):
+    print(blue+"gtk"+rst)
+    template = open(os.path.join(os.getcwd(), "gtk3/gtk.css.template"), 'rt').read()
+    if os.path.exists(os.path.join(os.path.expanduser("~"), ".themes/yai3/gtk-3.0/gtk.css")):
+        config = open(os.path.join(os.path.expanduser("~"), ".themes/yai3/gtk-3.0/gtk.css"), 'rt')
+        shutil.copyfile(config.name, os.path.join(os.path.expanduser("~"), ".themes/yai3/gtk-3.0/gtk.css.backup"))
+        config.close()
+    config = open(os.path.join(os.path.expanduser("~"), ".themes/yai3/gtk-3.0/gtk.css"), 'w')
+    config.write("/* default color scheme */\n")
+    config.write("@define-color bg_color "+scheme["background"]+";\n")
+    config.write("@define-color fg_color "+scheme["foreground"]+";\n")
+    config.write("@define-color base_color "+scheme["background"]+";\n")
+    config.write("@define-color text_color "+scheme["foreground"]+";\n")
+    config.write("@define-color selected_bg_color "+scheme["foreground"]+";\n")
+    config.write("@define-color selected_fg_color "+scheme["background"]+";\n")
+    config.write("@define-color tooltip_bg_color "+scheme["8"]+";\n")
+    config.write("@define-color tooltip_fg_color "+scheme["foreground"]+";\n\n")
+    config.write("/* dark color scheme */\n")
+    config.write("@define-color dark_bg_color "+scheme["background"]+";\n")
+    config.write("@define-color dark_fg_color "+scheme["7"]+";\n\n")
+    config.write("@define-color link_color "+scheme["4"]+";\n")
+    config.write("@define-color success_color "+scheme["2"]+";\n")
+    config.write("@define-color warning_color "+scheme["3"]+";\n")
+    config.write("@define-color error_color "+scheme["1"]+";\n")
+    config.write(template)
+    config.close()
+
+def firefox(scheme):
+    print(blue+"firefox"+rst)
+    if os.path.exists(os.path.join(xdg_config_home, "userstyles/colors.css")):
+        config = open(os.path.join(xdg_config_home, "userstyles/colors.css"), 'rt')
+        shutil.copyfile(config.name, os.path.join(xdg_config_home, "userstyles/colors.css.backup"))
+        config.close()
+    config = open(os.path.join(xdg_config_home, "userstyles/colors.css"), 'w')
+    config.write(":root {\n")
+    for color in range(0, 16):
+        config.write("  --color"+str(color)+": "+scheme[str(color)]+";\n")
+    config.write("  --bg: "+scheme["background"]+";\n")
+    config.write("  --fg: "+scheme["foreground"]+";\n")
+    config.write("}\n")
+    config.write("html, body {\n  font-family: Terminus !important;\n}\n")
+    config.close()
+
+def dmenu(scheme):
+    print(blue+"dmenu"+rst)
+    if os.path.exists(os.path.join(xdg_config_home, "dmenu/dmenu.env")):
+        config = open(os.path.join(xdg_config_home, "dmenu/dmenu.env"), 'rt')
+        shutil.copyfile(config.name, os.path.join(xdg_config_home, "dmenu/dmenu.env.backup"))
+        config.close()
+    config = open(os.path.join(xdg_config_home, "dmenu/dmenu.env"), 'w')
+    for color in range(0, 16):
+        config.write("COLOR"+str(color)+"=\""+scheme[str(color)]+"\"\n")
+    config.write("BG=\""+scheme["background"]+"\"\n")
+    config.write("FG=\""+scheme["foreground"]+"\"\n")
+    config.close()
+
+def dunst(scheme):
+    print(blue+"dunst"+rst)
+    template = open(os.path.join(os.getcwd(), "dunst/dunstrc.template"), 'rt').read()
+    if os.path.exists(os.path.join(xdg_config_home, "dunst/dunstrc")):
+        config = open(os.path.join(xdg_config_home, "dunst/dunstrc"), 'rt')
+        shutil.copyfile(config.name, os.path.join(xdg_config_home, "dunst/dunstrc.backup"))
+        config.close()
+    config = open(os.path.join(xdg_config_home, "dunst/dunstrc"), 'w')
+    config.write(template)
+    # low
+    config.write("[urgency_low]\n")
+    config.write("  background = "+scheme["4"]+"\n")
+    config.write("  foreground = "+scheme["foreground"]+"\n")
+    config.write("  timeout = 10\n")
+    # normal
+    config.write("[urgency_normal]\n")
+    config.write("  background = "+scheme["3"]+"\n")
+    config.write("  foreground = "+scheme["foreground"]+"\n")
+    config.write("  timeout = 10\n")
+    # critical
+    config.write("[urgency_critical]\n")
+    config.write("  background = "+scheme["1"]+"\n")
+    config.write("  foreground = "+scheme["foreground"]+"\n")
+    config.write("  timeout = 0\n")
+    config.close()
+
+def termite(scheme):
+    print(blue+"termite"+rst)
+    template = open(os.path.join(os.getcwd(), "termite/config.template"), 'rt').read()
+    if os.path.exists(os.path.join(xdg_config_home, "termite/config")):
+        config = open(os.path.join(xdg_config_home, "termite/config"), 'rt')
+        shutil.copyfile(config.name, os.path.join(xdg_config_home, "termite/config.backup"))
+        config.close()
+    config = open(os.path.join(xdg_config_home, "termite/config"), 'w')
+    config.write("[colors]\n")
+    config.write("foreground = "+scheme["foreground"]+"\n")
+    config.write("foreground_bold = "+scheme["foreground"]+"\n")
+    config.write("cursor = "+scheme["foreground"]+"\n")
+    config.write("background = "+scheme["background"]+"\n")
+    for color in range(0, 16):
+        config.write("color"+str(color)+" = "+scheme[str(color)]+"\n")
+    config.write(template)
+    config.close()
+
+def i3(scheme):
+    print(blue+"i3wm"+rst)
+    template = open(os.path.join(os.getcwd(), "i3/config.template"), 'rt').read()
+    if os.path.exists(os.path.join(xdg_config_home, "i3/config")):
+        config = open(os.path.join(xdg_config_home, "i3/config"), 'rt')
+        shutil.copyfile(config.name, os.path.join(xdg_config_home, "i3/config.backup"))
+        config.close()
+    config = open(os.path.join(xdg_config_home, "i3/config"), 'w')
+    config.write("# colors #######################################################################\n")
+    for color in range(0, 16):
+        config.write("set $color"+str(color)+" "+scheme[str(color)]+"\n")
+    config.write("set $bg "+scheme["background"]+"\n")
+    config.write("set $fg "+scheme["foreground"]+"\n")
+    config.write(template)
+    config.close()
+
+if __name__ == '__main__':
+    json_scheme = json.loads(open(sys.argv[1], 'rt').read())
+    print("Setting up color scheme for:")
+    i3(json_scheme)
+    termite(json_scheme)
+    dunst(json_scheme)
+    dmenu(json_scheme)
+    firefox(json_scheme)
+    gtk3(json_scheme)

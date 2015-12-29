@@ -1,0 +1,29 @@
+#!/bin/bash
+
+ABSOLUTE_PATH=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
+source $ABSOLUTE_PATH/dmenu.env
+
+DMENU="dmenu -dim 0.5 -dc $BG -fn Terminus-8 -w 1346 -h 10 -x 10 -y 379 -nb $BG -nf $FG -sb $BG -sf $COLOR4"
+
+choise=$(echo -e "lock\nexit\nsuspend\nhibernate\nreboot\nshutdown" | $DMENU | cut -f 1)
+
+locker="i3lock -c $BG \
+    --insidevercolor=${BG}ff \
+    --insidewrongcolor=${BG}ff \
+    --insidecolor=${BG}ff \
+    --ringvercol=${COLOR4}ff \
+    --ringwrongcolor=${COLOR1}ff \
+    --ringcolor=${BG}ff \
+    --linecolor=${BG}ff \
+    --textcolor=${FG}ff \
+    --keyhlcolor=${COLOR2}ff \
+    --bshlcolor=${COLOR3}ff && sleep 1"
+
+case $choise in
+  lock) $locker;;
+  exit) i3-msg exit;;
+  suspend) $locker && systemctl suspend;;
+  hibernate) $locker && systemctl hibernate;;
+  reboot) systemctl reboot;;
+  shutdown) systemctl poweroff -i;;
+esac

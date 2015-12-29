@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ABSOLUTE_PATH=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
+source $ABSOLUTE_PATH/dmenu.env
+
+dmenu_run -dim 0.5 -dc $BG -fn "Terminus-8" -w 1346 -h 10 -x 10 -y 379 -nb $BG -nf $FG -sb $BG -sf $COLOR4
