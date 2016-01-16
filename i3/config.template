@@ -15,6 +15,8 @@ bindsym $mod+Escape exec --no-startup-id $HOME/.config/dmenu/dmenu_pm
 bindsym $mod+t exec --no-startup-id $HOME/.config/dmenu/dmenu_themes
 bindsym --release Print exec --no-startup-id scrot $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
 bindsym --release Shift+Print exec --no-startup-id scrot -s $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
+bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
+bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
 
 # keys #########################################################################
 floating_modifier $mod
