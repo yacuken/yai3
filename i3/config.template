@@ -83,5 +83,5 @@ bar {
 
 # autostarts ###################################################################
 exec --no-startup-id compton -b
-
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon
 exec_always --no-startup-id hsetroot -solid "$bg"
