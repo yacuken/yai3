@@ -17,6 +17,8 @@ bindsym --release Print exec --no-startup-id scrot $HOME/Pictures/screenshot-$(d
 bindsym --release Shift+Print exec --no-startup-id scrot -s $HOME/Pictures/screenshot-$(date +%Y-%m-%d_%H-%M-%S).png
 bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
 bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
+bindsym XF86MonBrightnessUp exec light -A 5
+bindsym XF86MonBrightnessDown exec light -U 5
 
 # keys #########################################################################
 floating_modifier $mod
