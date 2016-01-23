@@ -24,5 +24,6 @@ configs collection for borderless i3wm setup
   ```
 * edit [~/.config/dmenu/dmenu_themes:10](https://github.com/yacuken/yai3/blob/master/.config/dmenu/dmenu_themes#L10) with your shortcut
 
-![http://www.youtube.com/watch?v=1dkNKHGdoys](./yai3_anim.gif)
+![](./yai3_anim.gif)  
+[YouTube](http://www.youtube.com/watch?v=1dkNKHGdoys)  
 *gif was edited*
