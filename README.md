@@ -1,8 +1,8 @@
-## yai3
-(yet another i3)
+# yai3
+(yet another i3)  
 configs collection for borderless i3wm setup
 
-### setup
+## setup
 * clone & copy
   ```
   git clone git@github.com:yacuken/yai3.git ~/yai3 && cd $_
@@ -11,7 +11,7 @@ configs collection for borderless i3wm setup
   ```
 * install stylish from stylish dir
 
-### auto reloading styles in firefox
+## auto reloading styles in firefox
 * install [custom buttons](https://addons.mozilla.org/ru/firefox/addon/custom-buttons/) extension (read description)
 * create new button with code below
   ```
@@ -24,4 +24,5 @@ configs collection for borderless i3wm setup
   ```
 * edit [~/.config/dmenu/dmenu_themes:10](https://github.com/yacuken/yai3/blob/master/.config/dmenu/dmenu_themes#L10) with your shortcut
 
-![](./yai3_anim.gif)
+![http://www.youtube.com/watch?v=1dkNKHGdoys](./yai3_anim.gif)
+*gif was edited*
