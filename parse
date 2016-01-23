@@ -8,8 +8,40 @@ from xdg.BaseDirectory import *
 blue = '\033[94m'
 rst = '\033[0m'
 
+def gtk2(scheme):
+    print(blue+"gtk2"+rst)
+    template = open(os.path.join(os.getcwd(), "gtk2/gtkrc.template"), 'rt').read()
+    if os.path.exists(os.path.join(os.path.expanduser("~"), ".themes/yai3/gtk-2.0/gtkrc")):
+        config = open(os.path.join(os.path.expanduser("~"), ".themes/yai3/gtk-2.0/gtkrc"), 'rt')
+        shutil.copyfile(config.name, os.path.join(os.path.expanduser("~"), ".themes/yai3/gtk-2.0/gtkrc.backup"))
+        config.close()
+    config = open(os.path.join(os.path.expanduser("~"), ".themes/yai3/gtk-2.0/gtkrc"), 'w')
+    config.write("# default color scheme\n\n")
+    config.write("gtk-color-scheme = ")
+    config.write("\"bg_color:"+scheme["background"]+"\\n")
+    config.write("fg_color:"+scheme["foreground"]+"\\n")
+    config.write("base_color:"+scheme["background"]+"\\n")
+    config.write("text_color:"+scheme["foreground"]+"\\n")
+    config.write("selected_bg_color:"+scheme["foreground"]+"\\n")
+    config.write("selected_fg_color:"+scheme["background"]+"\\n")
+    config.write("tooltip_bg_color:"+scheme["8"]+"\\n")
+    config.write("tooltip_fg_color:"+scheme["foreground"]+"\\n")
+    config.write("titlebar_bg_color:"+scheme["background"]+"\\n")
+    config.write("titlebar_fg_color:"+scheme["foreground"]+"\\n")
+    config.write("menubar_bg_color:"+scheme["background"]+"\\n")
+    config.write("menubar_fg_color:"+scheme["foreground"]+"\\n")
+    config.write("toolbar_bg_color:"+scheme["background"]+"\\n")
+    config.write("toolbar_fg_color:"+scheme["foreground"]+"\\n")
+    config.write("menu_bg_color:"+scheme["background"]+"\\n")
+    config.write("menu_fg_color:"+scheme["foreground"]+"\\n")
+    config.write("panel_bg_color:"+scheme["background"]+"\\n")
+    config.write("panel_fg_color:"+scheme["foreground"]+"\\n")
+    config.write("link_color:"+scheme["4"]+"\"\n")
+    config.write(template)
+    config.close()
+
 def gtk3(scheme):
-    print(blue+"gtk"+rst)
+    print(blue+"gtk3"+rst)
     template = open(os.path.join(os.getcwd(), "gtk3/gtk.css.template"), 'rt').read()
     if os.path.exists(os.path.join(os.path.expanduser("~"), ".themes/yai3/gtk-3.0/gtk.css")):
         config = open(os.path.join(os.path.expanduser("~"), ".themes/yai3/gtk-3.0/gtk.css"), 'rt')
@@ -133,3 +165,4 @@ if __name__ == '__main__':
     dmenu(json_scheme)
     firefox(json_scheme)
     gtk3(json_scheme)
+    gtk2(json_scheme)
